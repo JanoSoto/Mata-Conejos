@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mata Conejos!</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="fondo">
+			<div class="panel-control">
+			</div>
+			<div id="robadas"></div>
+			<div id="contador_golpes"></div>
+
+		</div>
+
+		<div id="game-zone">
+		</div>
+	</div>
+</body>
+
+<script>
+	var numZanahorias = 6;
+	var timeConejos = 1.5;
+	var maxHambre = 30.0;
+	var winZanahorias = 35.0;
+	var contador_golpes = 0.0;
+	var robadas = 0.0;
+	var golpea = false;
+
+	function golpeaConejo(numZanahorias){
+		var num = Math.floor(Math.random() * (numZanahorias + 1));
+		document.getElementById('conejo'+String(num)).focus();
+		//conejo.focus();
+	};
+
+	function colocaZanahorias(numZanahorias){
+		var game_zone = document.getElementById('game-zone');
+		var x = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+		var y = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
+
+		for(var k=0; k<numZanahorias; k++){
+			var conejo = document.createElement('img');
+			conejo.id = "conejo"+String(k);
+			conejo.className = "conejo";
+			conejo.src = "images/conejozanahoria.png";
+			var zanahoria = document.createElement('img');
+			zanahoria.className = "zanahoria";
+			zanahoria.id = "zanahoria"+String(k);
+			zanahoria.src = "images/zanahoria.png";
+		
+			if(x.length > 0 && y.length > 0){
+				var num1 = Math.floor(Math.random() * (x.length + 1));
+				var num2 = Math.floor(Math.random() * (y.length + 1));
+				var i = x[num1];
+				var j = y[num2];
+				y.splice(num2, 1);				
+			}
+			conejo.style.top = String(i)+"%";
+			conejo.style.left = String(j)+"%";
+			conejo.style.animationDuration = timeConejos+"s";
+			//conejo.style.display = "none";
+			game_zone.appendChild(conejo);
+			zanahoria.style.top = String(i)+"%";
+			zanahoria.style.left = String(j)+"%";
+			game_zone.appendChild(zanahoria);
+		}	
+	};
+
+	function sale_conejo(){
+		var num = Math.floor(Math.random() * (numZanahorias));
+		console.log("Sale el conejo "+num);
+		document.getElementById("zanahoria"+String(num)).style.display = "none";
+		document.getElementById("conejo"+String(num)).className = "conejo";
+		document.getElementById("conejo"+String(num)).style.animationPlayState = "running";
+
+		var golpe = document.querySelector('#conejo'+String(num)).onclick = function(){
+			console.log("Se golpea al conejo "+num);
+			this.className = "conejo_escondido";
+			//this.style.display = "none";
+			//this.style.animationPlayState = "paused";
+			document.getElementById("zanahoria"+String(num)).style.display = "inline";
+			contador_golpes++;
+			golpea = true;
+			document.getElementById("contador_golpes").style.background = "-moz-linear-gradient(bottom, #f00 "+parseFloat((contador_golpes/winZanahorias)*100)+"%, #0f0 "+parseFloat((contador_golpes/winZanahorias)*100+20)+"%)";
+			//document.getElementById("p_contador_golpes").innerHTML = contador_golpes/maxHambre +" - "+100-contador_golpes/maxHambre;
+		}
+
+	
+		setTimeout(function(){
+				console.log("Se esconde el conejo "+num);
+				document.getElementById("conejo"+num).className = "conejo_escondido";
+				//document.getElementById("conejo"+String(num)).style.animationPlayState = "paused";
+				document.getElementById("zanahoria"+String(num)).style.display = "inline";
+				if(!golpea){
+					robadas++;
+					document.getElementById("robadas").style.background = "-moz-linear-gradient(left, #f00 "+parseFloat((robadas/maxHambre)*100)+"%, #0f0 "+parseFloat((robadas/maxHambre)*100+20)+"%)";
+					//document.getElementById("robadas").innerHTML = parseFloat((robadas/maxHambre)*100)+" - "+parseFloat(100-(robadas/maxHambre)*100);
+				}
+					golpea = false;
+			}, timeConejos*1000);
+		
+	}
+
+	colocaZanahorias(numZanahorias);
+	setInterval('sale_conejo()', 2500);
+
+</script>
+
+</html>

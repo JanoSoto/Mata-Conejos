@@ -1,0 +1,84 @@
+.container{
+	/*display: inline-flex;*/
+	height: 27.5em;
+}
+
+.fondo{
+	-webkit-background-size: cover; 
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	background-image: url("images/fondo-aux.png"); 
+	background-size: cover; 
+	height: 60%; 
+	width: 100%; 
+	margin: 0 auto; 
+}
+
+#game-zone{
+	position: relative;
+	-webkit-background-size: cover; 
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	background-image: url("images/huerto-aux.jpg"); 
+	background-size: cover; 
+	height: 40%; 
+	width: 100%; 
+	margin: 0 auto;
+}
+
+.robadas{
+	float: right;
+}
+
+.conejo_escondido{
+	display: none;
+}
+.conejo{
+	position: absolute;
+	height: 5em;
+	width: 2em;
+	-moz-animation-name: sale_conejo;
+	/*-moz-animation-duration: 3s;*/	
+	-moz-animation-iteration-count: 1;
+	/*-moz-animation-direction: alternate;*/
+	-moz-animation-play-state: paused;
+	-moz-transform-origin: right bottom;
+}
+
+@-moz-keyframes sale_conejo{
+	from {
+		-moz-transform: scale(0);
+	}
+
+	to{
+		-moz-transform: scale(1.5);
+	}
+}
+.zanahoria{
+	position: absolute;
+	height: 3em;
+	width: 1em;
+	-moz-transition: -moz-transform 0.5s ease-in-out 0s;
+	-webkit-transition: -webkit-transform 0.5s ease-in-out 0s; 
+}
+
+#contador_golpes{
+	width: 10%;
+	height: 60%;
+	background: -moz-linear-gradient(bottom, #f00 1%, #0f0 20%);
+	position: relative;
+	/*top: 20%;*/
+	bottom: -28%;
+	left: 88%;
+	border-radius: 25px;
+}
+
+#robadas{
+	width: 60%;
+	height: 10%;
+	background: -moz-linear-gradient(left, #f00 0%, #0f0 20%);
+	position: relative;
+	bottom: -2%;
+	left: 2%;
+	border-radius: 25px;
+}

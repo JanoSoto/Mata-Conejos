@@ -1,0 +1,13 @@
+{
+  "name": "Mata Conejos!",
+  "description": "Juego en el que hay que salvar la granja de la devastación de los conejos",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": ""
+  },
+  "developer": {
+    "name": "Karla Rojas, Alejandro Soto, Ismael Vicencio",
+    "url": ""
+  },
+  "default_locale": "en"
+}
